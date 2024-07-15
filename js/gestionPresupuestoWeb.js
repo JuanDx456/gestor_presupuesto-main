@@ -318,8 +318,8 @@ function EditarHandle() {
         };
 
         
-        let etiquetas = prompt("Introduce las etiquetas:", etis).split(",");
-
+        let etiquetas = prompt("Introduce las etiquetas:", etis);
+        etiquetas = gestionPresupuesto.transformarListadoEtiquetas(etiquetas);
         this.gasto.actualizarDescripcion(descripcion);
         this.gasto.actualizarValor(valor);
         this.gasto.actualizarFecha(fecha);
@@ -372,7 +372,9 @@ function EditSubmit() {
         this.gasto.actualizarDescripcion(formulario.elements.descripcion.value);
         this.gasto.actualizarValor(Number(formulario.elements.valor.value));
         this.gasto.actualizarFecha(formulario.elements.fecha.value);
-        this.gasto.anyadirEtiquetas(...formulario.elements.etiquetas.value.split(","));
+        let etis = formulario.elements.etiquetas.value;
+        etis = gestionPresupuesto.transformarListadoEtiquetas(etis)
+        this.gasto.anyadirEtiquetas(...etis);
         repintar();
     }
 }
